@@ -1,7 +1,8 @@
 # main.py
 import sys
+import os
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QSizePolicy
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt, QTimer, QProcess
 from PySide6.QtGui import QColor, QPainter, QFont, QMouseEvent
 
 from exp import ExpTracker, capture_exp_bar, read_exp_and_percent, format_time, cute_evaluation
@@ -113,25 +114,25 @@ class ExpApp(QWidget):
     # 切換經驗計算開始/暫停
     def toggle_tracking(self):
         if not self.running:
-            # 啟動經驗計算與金幣計算計時器
+            # 第一次開始或重新計算
+            self.tracker.reset()
             self.meso_tracker.start()
             self.exp_timer.start()
             self.estimate_timer.start()
             self.meso_timer.start()
             self.running = True
-            self.btn_start.setText("暫停中")
-            # 如果登入正在進行，先停止登入功能
+            self.btn_start.setText("重新計算")
             if self.login_running:
                 self.login_ctrl.stop()
                 self.login_running = False
         else:
-            # 停止所有計時器與追蹤器
+            # 按下重新計算 → 停止後重新開始
             self.exp_timer.stop()
             self.estimate_timer.stop()
             self.meso_timer.stop()
             self.meso_tracker.stop()
             self.running = False
-            self.btn_start.setText("開始計算")
+            self.toggle_tracking()  # 再次呼叫自己重新開始（清空資料並重啟計時器）
         self.refresh_display()
 
     # 切換登入頻道開始/停止
@@ -196,7 +197,7 @@ class ExpApp(QWidget):
                 f"<b><span style='color:#0040FF;'>起始:</span></b> "
                 f"<b style='color:#003399;'>{start_exp:,}</b> "
                 f"<b style='color:#0066CC;'>{start_percent:.2f}%</b>  "
-                f"<span style='color:#8B4513;'>💰: {meso_now:,}</span>"
+                f"<span style='color:#8B4513;'>💰:{meso_now:,}</span>"
             )
 
         self.labels[1].setText(
