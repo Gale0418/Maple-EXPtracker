@@ -196,7 +196,7 @@ class ExpApp(QWidget):
                 f"<b><span style='color:#0040FF;'>起始:</span></b> "
                 f"<b style='color:#003399;'>{start_exp:,}</b> "
                 f"<b style='color:#0066CC;'>{start_percent:.2f}%</b>  "
-                f"<span style='color:#8B4513;'>💰: {meso_now:,}</span>"
+                f"<span style='color:#8B4513;'>💰:{meso_now:,}</span>"
             )
 
         self.labels[1].setText(
