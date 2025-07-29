@@ -196,25 +196,25 @@ class ExpApp(QWidget):
                 f"<b><span style='color:#0040FF;'>起始:</span></b> "
                 f"<b style='color:#003399;'>{start_exp:,}</b> "
                 f"<b style='color:#0066CC;'>{start_percent:.2f}%</b>  "
-                f"<span style='color:#8B4513;'>金幣: {meso_now:,}</span>"
+                f"<span style='color:#8B4513;'>💰: {meso_now:,}</span>"
             )
 
         self.labels[1].setText(
-            f"<b><span style='color:#006400;'>累積:</span></b> "
+            f"<b><span style='color:#006400;'>累積📈:</span></b> "
             f"<b style='color:#004d00;'>{gained_exp:,}</b> "
             f"<b style='color:#228B22;'>{gained_percent:.2f}%</b>  "
-            f"<span style='color:#A0522D;'>+{meso_gained:,} 金幣</span>"
+            f"<span style='color:#A0522D;'>💰:+{meso_gained:,}</span>"
         )
 
         self.labels[2].setText(
-            f"<b><span style='color:#800000;'>紀錄:</span></b> "
-            f"<b>{best_gain:,} EXP</b> / 10 分鐘  "
-            f"<b>運行:</b> {format_time(t.runtime())}"
+            f"<b><span style='color:#800000;'>🎉最快紀錄:</span></b> "
+            f"<b>{best_gain:,} EXP</b>/10分鐘  "
+            f"<b>⚙️運作:</b> {format_time(t.runtime())}"
         )
 
         diff = abs(percent_rate_now - (t.best_exp_gain / t.gained_exp * t.gained_percent if t.gained_exp else 0))
         self.labels[3].setText(
-            f"<b><span style='color:#FF8C00;'>剩餘:</span></b> "
+            f"<b><span style='color:#FF8C00;'>⏱️剩多久升級:</span></b> "
             f"<b>{format_time(t.estimated_time)}</b> "
             f"{cute_evaluation(diff)}"
         )
