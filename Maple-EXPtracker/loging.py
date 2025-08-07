@@ -44,7 +44,7 @@ class LoginChannelController:
                     self.running = False  # 停止登入流程
                     break
 
-                time.sleep(5)  # 改成 5 秒掃描一次
+                time.sleep(random.uniform(3, 5))  # ✅ 改成隨機間隔
 
     def _find_image(self, haystack, needle_path, threshold=0.8):
         needle = cv2.imread(needle_path)
@@ -59,8 +59,7 @@ class LoginChannelController:
 
     def _click_random_pos(self, loc):
         (x, y), w, h = loc
-        rand_x = x + random.randint(5, max(5, w - 10))
-        rand_y = y + random.randint(5, max(5, h - 10))
-        # 模擬不規則弧線移動
-        pyautogui.moveTo(rand_x, rand_y, duration=random.uniform(0.3, 0.7), tween=pyautogui.easeInOutQuad)
+        rand_x = x + random.randint(-10, w + 10)  # ✅ 弧度更大
+        rand_y = y + random.randint(-10, h + 10)
+        pyautogui.moveTo(rand_x, rand_y, duration=random.uniform(0.5, 1.2), tween=pyautogui.easeInOutQuad)
         pyautogui.click()
