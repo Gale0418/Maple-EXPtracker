@@ -20,7 +20,7 @@
     *   所有文字採用動態花火特效，雖然沒什麼用但是我看了會很開心w
 *   **🛠️ 自動化運作**
     *   非侵入式掃描，基於視覺辨識不讀取記憶體。
-
+<img src="https://pbs.twimg.com/media/G9v6v92boAEiXAl?format=jpg&name=large" width="600" alt="Cover Image">
 ## ⚠️ 系統需求與限制 (Requirements) - **重要！**
 
 由於本程式採用 **「絕對座標圖像識別」** 技術，對運行環境有嚴格要求：
