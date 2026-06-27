@@ -22,8 +22,7 @@ from PySide6.QtGui import (
 from exp import ExpTracker, capture_exp_bar, read_exp_and_percent, format_time, cute_evaluation
 from loging import LoginChannelController
 from meso import MesoTracker
-
-ASSETS_DIR = Path("assets")  # 資源資料夾
+from runtime_paths import ASSETS_DIR
 
 
 # ---------------------------------------

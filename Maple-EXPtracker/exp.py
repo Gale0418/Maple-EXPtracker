@@ -7,8 +7,9 @@ import pytesseract
 import numpy as np
 import pyautogui
 
-# 設定 Tesseract 路徑（請依照你的安裝位置調整）
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+from runtime_paths import configure_tesseract_cmd, resolve_asset_path
+
+configure_tesseract_cmd(pytesseract)
 
 
 # ---------- 經驗追蹤核心 ----------
@@ -162,7 +163,7 @@ def capture_exp_bar() -> np.ndarray | None:
     """
     找到 EXP.png 後，擷取其右方 400x20 的區塊（顯示數字用）
     """
-    pos = find_template_on_screen("assets/EXP.png", confidence=0.8)
+    pos = find_template_on_screen(resolve_asset_path("EXP.png"), confidence=0.8)
     if not pos:
         return None
     x, y = pos

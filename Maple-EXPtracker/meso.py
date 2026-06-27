@@ -7,7 +7,10 @@ import time
 from datetime import datetime
 from PIL import ImageGrab
 import re
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+from runtime_paths import configure_tesseract_cmd, resolve_asset_path
+
+configure_tesseract_cmd(pytesseract)
 class MesoTracker:
     def __init__(self):
         self.start_meso = None
@@ -47,7 +50,10 @@ def read_meso_amount(img) -> int | None:
     return int(match.group().replace(",", ""))
 
 
-def open_and_read_wallet(template_path="assets/GASH.png"):
+def open_and_read_wallet(template_path=None):
+    if template_path is None:
+        template_path = resolve_asset_path("GASH.png")
+
     pyautogui.press('i')
     time.sleep(0.8)
 

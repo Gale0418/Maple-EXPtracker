@@ -7,6 +7,8 @@ import cv2
 import numpy as np
 import pyautogui
 
+from runtime_paths import resolve_asset_path
+
 class LoginChannelController:
     def __init__(self):
         self.running = False
@@ -31,8 +33,8 @@ class LoginChannelController:
                 screen = np.array(sct.grab(monitor))
                 screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
 
-                login_loc = self._find_image(screen, "assets/login.png")
-                select_loc = self._find_image(screen, "assets/select.png")
+                login_loc = self._find_image(screen, resolve_asset_path("login.png"))
+                select_loc = self._find_image(screen, resolve_asset_path("select.png"))
 
                 if login_loc:
                     self._click_random_pos(login_loc)
